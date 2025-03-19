@@ -7,17 +7,13 @@ import 'package:google_fonts/google_fonts.dart';
 class DetailScreen extends StatelessWidget {
   final Cat cat;
 
-  const DetailScreen({
-    super.key,
-    required this.cat,
-  });
+  const DetailScreen({super.key, required this.cat});
 
   @override
   Widget build(BuildContext context) {
     final breed = cat.breed;
     return Scaffold(
-      backgroundColor:
-          Colors.blueGrey.shade100,
+      backgroundColor: Colors.blueGrey.shade100,
       appBar: AppBar(
         title: Text(
           'Details',
@@ -28,38 +24,27 @@ class DetailScreen extends StatelessWidget {
           ),
         ),
         centerTitle: true,
-        backgroundColor:
-            Colors.blueGrey,
+        backgroundColor: Colors.blueGrey,
       ),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
             children: [
-
               Text(
                 breed.name,
                 style: GoogleFonts.deliusSwashCaps(
                   fontSize: 36,
                   fontWeight: FontWeight.bold,
                   color: Colors.white,
-                  shadows: [
-                    Shadow(
-                      blurRadius: 10.0,
-                      offset: Offset(2.0, 2.0),
-                    ),
-                  ],
+                  shadows: [Shadow(blurRadius: 10.0, offset: Offset(2.0, 2.0))],
                 ),
               ),
               const SizedBox(height: 20),
               Padding(
-                padding: const EdgeInsets.all(
-                  16.0,
-                ),
+                padding: const EdgeInsets.all(16.0),
                 child: ClipRRect(
-                  borderRadius: BorderRadius.circular(
-                    20.0,
-                  ),
+                  borderRadius: BorderRadius.circular(20.0),
                   child: CachedNetworkImage(
                     imageUrl: cat.imageUrl,
                     placeholder:
@@ -76,13 +61,7 @@ class DetailScreen extends StatelessWidget {
                 style: GoogleFonts.rubik(
                   fontSize: 22,
                   color: Colors.white,
-                  shadows: [
-                    Shadow(
-                      blurRadius: 8.0,
-
-                      offset: Offset(2.0, 2.0),
-                    ),
-                  ],
+                  shadows: [Shadow(blurRadius: 8.0, offset: Offset(2.0, 2.0))],
                 ),
               ),
               const SizedBox(height: 10),
@@ -93,9 +72,7 @@ class DetailScreen extends StatelessWidget {
                     'Origin: ',
                     style: GoogleFonts.rubik(
                       fontSize: 22,
-                      color:
-                          Colors
-                              .blueGrey,
+                      color: Colors.blueGrey,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -106,10 +83,7 @@ class DetailScreen extends StatelessWidget {
                         fontSize: 22,
                         color: Colors.white,
                         shadows: [
-                          Shadow(
-                            blurRadius: 8.0,
-                            offset: Offset(2.0, 2.0),
-                          ),
+                          Shadow(blurRadius: 8.0, offset: Offset(2.0, 2.0)),
                         ],
                       ),
                     ),
@@ -123,9 +97,7 @@ class DetailScreen extends StatelessWidget {
                   text: 'Temperament: ',
                   style: GoogleFonts.rubik(
                     fontSize: 22,
-                    color:
-                        Colors
-                            .blueGrey,
+                    color: Colors.blueGrey,
                     fontWeight: FontWeight.bold,
                   ),
                   children: [
@@ -135,10 +107,7 @@ class DetailScreen extends StatelessWidget {
                         fontSize: 22,
                         color: Colors.white,
                         shadows: [
-                          Shadow(
-                            blurRadius: 8.0,
-                            offset: Offset(2.0, 2.0),
-                          ),
+                          Shadow(blurRadius: 8.0, offset: Offset(2.0, 2.0)),
                         ],
                       ),
                     ),
@@ -153,9 +122,7 @@ class DetailScreen extends StatelessWidget {
                     'Life span: ',
                     style: GoogleFonts.rubik(
                       fontSize: 22,
-                      color:
-                          Colors
-                              .blueGrey,
+                      color: Colors.blueGrey,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -166,10 +133,7 @@ class DetailScreen extends StatelessWidget {
                         fontSize: 22,
                         color: Colors.white,
                         shadows: [
-                          Shadow(
-                            blurRadius: 8.0,
-                            offset: Offset(2.0, 2.0),
-                          ),
+                          Shadow(blurRadius: 8.0, offset: Offset(2.0, 2.0)),
                         ],
                       ),
                     ),
@@ -184,8 +148,7 @@ class DetailScreen extends StatelessWidget {
                     'Grooming: ',
                     style: GoogleFonts.rubik(
                       fontSize: 22,
-                      color:
-                          Colors.blueGrey,
+                      color: Colors.blueGrey,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -196,10 +159,7 @@ class DetailScreen extends StatelessWidget {
                         fontSize: 22,
                         color: Colors.white,
                         shadows: [
-                          Shadow(
-                            blurRadius: 8.0,
-                            offset: Offset(2.0, 2.0),
-                          ),
+                          Shadow(blurRadius: 8.0, offset: Offset(2.0, 2.0)),
                         ],
                       ),
                     ),
