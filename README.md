@@ -1,16 +1,17 @@
-# kototinder
+# KotoTinder
 
-A new Flutter project.
+KotoTinder - приложение наподобие Tinder, в котором пользователи могут посмотреть фотографии кошек различных пород, а также лайкнуть понравившиеся породы.
 
-## Getting Started
+## Features
 
-This project is a starting point for a Flutter application.
+1. На главном экране отображается рандомная порода кошки
+2. Свайп влево пропускает кошку, в то время как свайп вправо лайкает понравившуюся породу
+3. При нажатии на лайк (или свайпе вправо) увеличивается счетчик лайков
+4. Нажатие на фото кошки приводит к отрытию экрана с детальным описанием породы этой кошки
+5. Кэширование изображений, позволяющее загружать фотографии быстрее
 
-A few resources to get you started if this is your first Flutter project:
+## Screenshots
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+![assets/readme/KotoTinder1.png](assets/readme/KotoTinder1.png)
+![assets/readme/KotoTinder2.png](assets/readme/KotoTinder2.png)
+![assets/readme/KotoTinder3.png](assets/readme/KotoTinder3.png)
