@@ -12,8 +12,6 @@ KotoTinder - приложение наподобие Tinder, в котором �
 
 ## Screenshots
 
-## Screenshots
-
 | ![KotoTinder1](assets/readme/KotoTinder1.png) | ![KotoTinder2](assets/readme/KotoTinder2.png) | ![KotoTinder3](assets/readme/KotoTinder3.png) |
 |:---:|:---:|:---:|
 | Главный экран | Главный экран | Экран с описанием породы |
