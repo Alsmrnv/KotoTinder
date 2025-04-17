@@ -1,12 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import '../models/cat_info.dart';
-import '../services/cat_api.dart';
-import '../storage/like_count_storage.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'dart:io';
+
+import '../../Data/models/cat_info.dart';
+import '../../Domain/repositories/cat_repository.dart';
+import '../../Data/storage/like_count_storage.dart';
+
 import '../widgets/like_button.dart';
 import '../widgets/dislike_button.dart';
+import 'liked_cats_screen.dart';
 import 'description_screen.dart';
-import 'package:google_fonts/google_fonts.dart';
+
+import 'package:get_it/get_it.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -20,6 +26,10 @@ class HomeScreenState extends State<HomeScreen> {
   int _likesCount = 0;
   double _swipeDistance = 0;
   double _dragStart = 0.0;
+  bool _isLoading = false;
+
+  final List<Cat> _likedCats = [];
+  late final CatRepository _catRepository = GetIt.instance<CatRepository>();
 
   @override
   void initState() {
@@ -29,30 +39,30 @@ class HomeScreenState extends State<HomeScreen> {
   }
 
   _loadNewCat() async {
+    setState(() {
+      _isLoading = true;
+    });
+
     try {
-      Cat newCat = await CatService().fetchRandomCat();
+      Cat newCat = await _catRepository.getRandomCat();
       if (mounted) {
         setState(() {
           _currentCat = newCat;
+          _isLoading = false;
         });
       }
     } catch (e) {
       if (mounted) {
-        showDialog(
-          context: context,
-          builder: (BuildContext context) {
-            return AlertDialog(
-              title: Text('Ошибка'),
-              content: Text('Не удалось загрузить котика. Попробуйте позже.'),
-              actions: [
-                TextButton(
-                  onPressed: () => Navigator.of(context).pop(),
-                  child: Text('Ок'),
-                ),
-              ],
-            );
-          },
-        );
+        setState(() {
+          _isLoading = false;
+        });
+        if (e is SocketException) {
+          _showErrorDialog('Please check your network connection.');
+        } else {
+          _showErrorDialog(
+            'There was an error loading the cat. Try again later.',
+          );
+        }
       }
     }
   }
@@ -67,6 +77,19 @@ class HomeScreenState extends State<HomeScreen> {
   _onLike() async {
     await LikesStorage.incrementLikesCount();
     _loadLikesCount();
+
+    if (_currentCat != null) {
+      setState(() {
+        _likedCats.add(
+          Cat(
+            imageUrl: _currentCat!.imageUrl,
+            breed: _currentCat!.breed,
+            likedAt: DateTime.now(),
+          ),
+        );
+      });
+    }
+
     _loadNewCat();
   }
 
@@ -86,6 +109,30 @@ class HomeScreenState extends State<HomeScreen> {
     });
   }
 
+  void _showErrorDialog(String errorMessage) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Network error'),
+          content: Row(
+            children: [
+              Icon(Icons.wifi_off, color: Colors.deepOrange),
+              const SizedBox(width: 10),
+              Expanded(child: Text(errorMessage)),
+            ],
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(),
+              child: const Text('Ok'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -100,10 +147,34 @@ class HomeScreenState extends State<HomeScreen> {
         ),
         centerTitle: true,
         backgroundColor: Colors.blueGrey,
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.favorite),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => LikedCatsScreen(likedCats: _likedCats),
+                ),
+              );
+            },
+          ),
+        ],
       ),
       body:
-          _currentCat == null
-              ? const Center(child: CircularProgressIndicator())
+          _isLoading
+              ? Center(
+                child: SizedBox(
+                  width: 100,
+                  height: 100,
+                  child: CircularProgressIndicator(
+                    strokeWidth: 8,
+                    valueColor: AlwaysStoppedAnimation<Color>(
+                      Colors.blueAccent,
+                    ),
+                  ),
+                ),
+              )
               : GestureDetector(
                 onHorizontalDragStart: (details) {
                   _dragStart = details.localPosition.dx;
@@ -159,24 +230,15 @@ class HomeScreenState extends State<HomeScreen> {
                                     vertical: 6,
                                   ),
                                   decoration: BoxDecoration(
+                                    color: const Color.fromRGBO(0, 0, 0, 0.5),
                                     borderRadius: BorderRadius.circular(10),
                                   ),
-                                  child: Container(
-                                    padding: const EdgeInsets.symmetric(
-                                      horizontal: 12,
-                                      vertical: 6,
-                                    ),
-                                    decoration: BoxDecoration(
-                                      color: Color.fromRGBO(0, 0, 0, 0.5),
-                                      borderRadius: BorderRadius.circular(10),
-                                    ),
-                                    child: Text(
-                                      _currentCat!.breed.name,
-                                      style: const TextStyle(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.white,
-                                      ),
+                                  child: Text(
+                                    _currentCat!.breed.name,
+                                    style: const TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white,
                                     ),
                                   ),
                                 ),
@@ -198,7 +260,7 @@ class HomeScreenState extends State<HomeScreen> {
                             ),
                             child: Text(
                               'Likes: $_likesCount',
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontSize: 24,
                                 fontWeight: FontWeight.bold,
                                 color: Colors.white,

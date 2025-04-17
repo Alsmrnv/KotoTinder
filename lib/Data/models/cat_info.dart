@@ -30,16 +30,18 @@ class Breed {
 class Cat {
   final String imageUrl;
   final Breed breed;
+  final DateTime likedAt;
 
-  Cat({required this.imageUrl, required this.breed});
+  Cat({required this.imageUrl, required this.breed, required this.likedAt});
 
   factory Cat.fromJson(Map<String, dynamic> json) {
     if (json['breeds'] == null || json['breeds'].isEmpty) {
-      throw Exception('Нет данных о породе');
+      throw Exception('Data on the breed not found');
     }
     return Cat(
       imageUrl: json['url'] as String,
       breed: Breed.fromJson(json['breeds'][0] as Map<String, dynamic>),
+      likedAt: DateTime.now(),
     );
   }
 }

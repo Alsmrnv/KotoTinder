@@ -1,13 +1,15 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import '../models/cat_info.dart';
+import '../../Domain/services/cat_service.dart';
 
-class CatService {
+class CatApiService implements CatService {
   static const String _url =
       'https://api.thecatapi.com/v1/images/search?has_breeds=1';
   static const String _apiKey =
       'live_A2nYRQsgURDsg97FJMdDp8sYKez6Slo1IhlTOnejGhL9UuyY8HcX6MKdHGKkbGrw';
 
+  @override
   Future<Cat> fetchRandomCat() async {
     final response = await http.get(
       Uri.parse(_url),
@@ -24,9 +26,9 @@ class CatService {
         return Cat.fromJson(catData as Map<String, dynamic>);
       }
     } else {
-      throw Exception('Ошибка при загрузке данных: ${response.statusCode}');
+      throw Exception('Error loading data: ${response.statusCode}');
     }
 
-    throw Exception('Не удалось найти котика');
+    throw Exception("Couldn't find the cat");
   }
 }

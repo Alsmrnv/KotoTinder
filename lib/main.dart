@@ -1,8 +1,24 @@
 import 'package:flutter/material.dart';
-import 'screens/home_screen.dart';
+import 'package:get_it/get_it.dart';
+
+import 'Data/services/cat_api.dart';
+import 'Data/repositories/cat_repository_impl.dart';
+import 'Domain/repositories/cat_repository.dart';
+
+import 'Presentation/screens/home_screen.dart';
 
 void main() {
+  setupDependencies();
   runApp(const MyApp());
+}
+
+void setupDependencies() {
+  final getIt = GetIt.instance;
+
+  getIt.registerLazySingleton<CatApiService>(() => CatApiService());
+  getIt.registerLazySingleton<CatRepository>(
+    () => CatRepositoryImpl(getIt<CatApiService>()),
+  );
 }
 
 class MyApp extends StatelessWidget {
