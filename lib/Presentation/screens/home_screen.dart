@@ -148,9 +148,8 @@ class HomeScreenState extends State<HomeScreen> {
         centerTitle: true,
         backgroundColor: Colors.blueGrey,
         actions: [
-          IconButton(
-            icon: const Icon(Icons.favorite),
-            onPressed: () {
+          GestureDetector(
+            onTap: () {
               Navigator.push(
                 context,
                 MaterialPageRoute(
@@ -158,9 +157,31 @@ class HomeScreenState extends State<HomeScreen> {
                 ),
               );
             },
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+              decoration: BoxDecoration(
+                color: Colors.blueGrey.shade700,
+                borderRadius: BorderRadius.circular(30),
+              ),
+              child: Row(
+                children: [
+                  const Icon(Icons.favorite, color: Colors.white),
+                  const SizedBox(width: 8),
+                  Text(
+                    'Likes',
+                    style: GoogleFonts.rubik(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
+                  ),
+                ],
+              ),
+            ),
           ),
         ],
       ),
+
       body:
           _isLoading
               ? Center(

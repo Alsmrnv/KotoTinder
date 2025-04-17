@@ -56,117 +56,138 @@ class DetailScreen extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 20),
-              Text(
-                breed.description,
-                style: GoogleFonts.rubik(
-                  fontSize: 22,
-                  color: Colors.white,
-                  shadows: [Shadow(blurRadius: 8.0, offset: Offset(2.0, 2.0))],
+              Container(
+                width: double.infinity,
+                padding: const EdgeInsets.all(16.0),
+                decoration: BoxDecoration(
+                  color: Colors.blueGrey,
+                  borderRadius: BorderRadius.circular(16),
                 ),
-              ),
-              const SizedBox(height: 10),
-
-              Row(
-                children: [
-                  Text(
-                    'Origin: ',
-                    style: GoogleFonts.rubik(
-                      fontSize: 22,
-                      color: Colors.blueGrey,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  Expanded(
-                    child: Text(
-                      breed.origin,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      breed.description,
                       style: GoogleFonts.rubik(
-                        fontSize: 22,
+                        fontSize: 20,
                         color: Colors.white,
-                        shadows: [
-                          Shadow(blurRadius: 8.0, offset: Offset(2.0, 2.0)),
+                      ),
+                    ),
+                    const SizedBox(height: 16),
+                    RichText(
+                      text: TextSpan(
+                        children: [
+                          TextSpan(
+                            text: 'Origin: ',
+                            style: GoogleFonts.rubik(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.blueGrey.shade100,
+                              shadows: [
+                                Shadow(
+                                  blurRadius: 1.0,
+                                  offset: Offset(2.0, 2.0),
+                                ),
+                              ],
+                            ),
+                          ),
+                          TextSpan(
+                            text: breed.origin,
+                            style: GoogleFonts.rubik(
+                              fontSize: 20,
+                              color: Colors.white,
+                            ),
+                          ),
                         ],
                       ),
                     ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 10),
-
-              RichText(
-                text: TextSpan(
-                  text: 'Temperament: ',
-                  style: GoogleFonts.rubik(
-                    fontSize: 22,
-                    color: Colors.blueGrey,
-                    fontWeight: FontWeight.bold,
-                  ),
-                  children: [
-                    TextSpan(
-                      text: breed.temperament,
-                      style: GoogleFonts.rubik(
-                        fontSize: 22,
-                        color: Colors.white,
-                        shadows: [
-                          Shadow(blurRadius: 8.0, offset: Offset(2.0, 2.0)),
+                    const SizedBox(height: 8),
+                    RichText(
+                      text: TextSpan(
+                        children: [
+                          TextSpan(
+                            text: 'Temperament: ',
+                            style: GoogleFonts.rubik(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.blueGrey.shade100,
+                              shadows: [
+                                Shadow(
+                                  blurRadius: 1.0,
+                                  offset: Offset(2.0, 2.0),
+                                ),
+                              ],
+                            ),
+                          ),
+                          TextSpan(
+                            text: breed.temperament,
+                            style: GoogleFonts.rubik(
+                              fontSize: 20,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    RichText(
+                      text: TextSpan(
+                        children: [
+                          TextSpan(
+                            text: 'Life span: ',
+                            style: GoogleFonts.rubik(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.blueGrey.shade100,
+                              shadows: [
+                                Shadow(
+                                  blurRadius: 1.0,
+                                  offset: Offset(2.0, 2.0),
+                                ),
+                              ],
+                            ),
+                          ),
+                          TextSpan(
+                            text: '${breed.lifeSpan} years',
+                            style: GoogleFonts.rubik(
+                              fontSize: 20,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    RichText(
+                      text: TextSpan(
+                        children: [
+                          TextSpan(
+                            text: 'Grooming: ',
+                            style: GoogleFonts.rubik(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.blueGrey.shade100,
+                              shadows: [
+                                Shadow(
+                                  blurRadius: 1.0,
+                                  offset: Offset(2.0, 2.0),
+                                ),
+                              ],
+                            ),
+                          ),
+                          TextSpan(
+                            text: '${breed.grooming}/5',
+                            style: GoogleFonts.rubik(
+                              fontSize: 20,
+                              color: Colors.white,
+                            ),
+                          ),
                         ],
                       ),
                     ),
                   ],
                 ),
               ),
-              const SizedBox(height: 10),
-
-              Row(
-                children: [
-                  Text(
-                    'Life span: ',
-                    style: GoogleFonts.rubik(
-                      fontSize: 22,
-                      color: Colors.blueGrey,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  Expanded(
-                    child: Text(
-                      '${breed.lifeSpan} years',
-                      style: GoogleFonts.rubik(
-                        fontSize: 22,
-                        color: Colors.white,
-                        shadows: [
-                          Shadow(blurRadius: 8.0, offset: Offset(2.0, 2.0)),
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 10),
-
-              Row(
-                children: [
-                  Text(
-                    'Grooming: ',
-                    style: GoogleFonts.rubik(
-                      fontSize: 22,
-                      color: Colors.blueGrey,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  Expanded(
-                    child: Text(
-                      '${breed.grooming}/5',
-                      style: GoogleFonts.rubik(
-                        fontSize: 22,
-                        color: Colors.white,
-                        shadows: [
-                          Shadow(blurRadius: 8.0, offset: Offset(2.0, 2.0)),
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 10),
             ],
           ),
         ),
