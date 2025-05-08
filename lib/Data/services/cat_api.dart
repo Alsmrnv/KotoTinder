@@ -2,18 +2,18 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import '../models/cat_info.dart';
 import '../../Domain/services/cat_service.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class CatApiService implements CatService {
   static const String _url =
       'https://api.thecatapi.com/v1/images/search?has_breeds=1';
-  static const String _apiKey =
-      'live_A2nYRQsgURDsg97FJMdDp8sYKez6Slo1IhlTOnejGhL9UuyY8HcX6MKdHGKkbGrw';
+  final apiKey = dotenv.env['API_KEY'];
 
   @override
   Future<Cat> fetchRandomCat() async {
     final response = await http.get(
       Uri.parse(_url),
-      headers: {'x-api-key': _apiKey},
+      headers: {'x-api-key': apiKey ?? ''},
     );
 
     if (response.statusCode == 200) {
