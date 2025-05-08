@@ -277,9 +277,10 @@ class HomeScreenState extends State<HomeScreen>
             ElevatedButton.icon(
               onPressed: _loadNewCat,
               icon: Icon(Icons.refresh),
-              label: Text('Try again'),
+              label: Text('Try again', style: TextStyle(color: Colors.white)),
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.blueGrey,
+                foregroundColor: Colors.white,
                 padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
               ),
             ),
@@ -349,17 +350,17 @@ class HomeScreenState extends State<HomeScreen>
                               imageUrl: _currentCat!.imageUrl,
                               placeholder:
                                   (context, url) => Center(
-                                    child: CircularProgressIndicator(),
-                                  ),
+                                child: CircularProgressIndicator(),
+                              ),
                               errorWidget:
                                   (context, url, error) => Container(
-                                    color: Colors.grey.shade300,
-                                    child: Icon(
-                                      Icons.error,
-                                      size: 50,
-                                      color: Colors.red,
-                                    ),
-                                  ),
+                                color: Colors.grey.shade300,
+                                child: Icon(
+                                  Icons.error,
+                                  size: 50,
+                                  color: Colors.red,
+                                ),
+                              ),
                               fit: BoxFit.cover,
                             ),
                           ),
