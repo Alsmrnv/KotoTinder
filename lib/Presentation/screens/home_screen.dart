@@ -350,17 +350,17 @@ class HomeScreenState extends State<HomeScreen>
                               imageUrl: _currentCat!.imageUrl,
                               placeholder:
                                   (context, url) => Center(
-                                child: CircularProgressIndicator(),
-                              ),
+                                    child: CircularProgressIndicator(),
+                                  ),
                               errorWidget:
                                   (context, url, error) => Container(
-                                color: Colors.grey.shade300,
-                                child: Icon(
-                                  Icons.error,
-                                  size: 50,
-                                  color: Colors.red,
-                                ),
-                              ),
+                                    color: Colors.grey.shade300,
+                                    child: Icon(
+                                      Icons.error,
+                                      size: 50,
+                                      color: Colors.red,
+                                    ),
+                                  ),
                               fit: BoxFit.cover,
                             ),
                           ),
