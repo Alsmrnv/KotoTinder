@@ -38,4 +38,4 @@ KotoTinder - приложение наподобие Tinder, в котором �
 
 ## Download
 
-[.apk file](https://github.com/Alsmrnv/KotoTinder/releases/tag/v.2.0.0)
+[.apk file](https://github.com/Alsmrnv/KotoTinder/releases/tag/v3.0.0)
