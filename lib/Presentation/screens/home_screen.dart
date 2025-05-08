@@ -262,7 +262,7 @@ class HomeScreenState extends State<HomeScreen>
             Icon(
               Icons.pets,
               size: 100,
-              color: Colors.blueGrey.withOpacity(0.5),
+              color: Colors.blueGrey.withValues(alpha: 0.5),
             ),
             const SizedBox(height: 24),
             Text(
@@ -279,18 +279,11 @@ class HomeScreenState extends State<HomeScreen>
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Icon(
-                    Icons.signal_wifi_off,
-                    color: Colors.blueGrey,
-                    size: 30,
-                  ),
+                  Icon(Icons.signal_wifi_off, color: Colors.blueGrey, size: 30),
                   const SizedBox(width: 8),
                   Text(
                     'Please check your network connection.',
-                    style: TextStyle(
-                      fontSize: 16,
-                      color: Colors.blueGrey,
-                    ),
+                    style: TextStyle(fontSize: 16, color: Colors.blueGrey),
                   ),
                 ],
               ),

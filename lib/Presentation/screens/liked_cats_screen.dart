@@ -75,51 +75,56 @@ class LikedCatsScreenState extends State<LikedCatsScreen> {
           centerTitle: true,
           backgroundColor: Colors.blueGrey,
         ),
-        body: _cats.isEmpty
-            ? _buildEmptyState()
-            : Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: DropdownButtonFormField<String>(
-                value: _selectedBreed ?? 'All Breeds',
-                decoration: InputDecoration(
-                  labelText: 'Filter by breed',
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
+        body:
+            _cats.isEmpty
+                ? _buildEmptyState()
+                : Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: DropdownButtonFormField<String>(
+                        value: _selectedBreed ?? 'All Breeds',
+                        decoration: InputDecoration(
+                          labelText: 'Filter by breed',
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                        ),
+                        items:
+                            breeds
+                                .map(
+                                  (breed) => DropdownMenuItem(
+                                    value: breed,
+                                    child: Text(breed),
+                                  ),
+                                )
+                                .toList(),
+                        onChanged: _filterByBreed,
+                      ),
+                    ),
+                    Expanded(
+                      child:
+                          _filteredCats.isEmpty
+                              ? Center(
+                                child: Text(
+                                  'No cats found for selected breed.',
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    color: Colors.grey,
+                                  ),
+                                ),
+                              )
+                              : ListView.builder(
+                                padding: const EdgeInsets.all(16),
+                                itemCount: _filteredCats.length,
+                                itemBuilder: (context, index) {
+                                  final cat = _filteredCats[index];
+                                  return _buildCatCard(cat, index);
+                                },
+                              ),
+                    ),
+                  ],
                 ),
-                items: breeds
-                    .map((breed) => DropdownMenuItem(
-                  value: breed,
-                  child: Text(breed),
-                ))
-                    .toList(),
-                onChanged: _filterByBreed,
-              ),
-            ),
-            Expanded(
-              child: _filteredCats.isEmpty
-                  ? Center(
-                child: Text(
-                  'No cats found for selected breed.',
-                  style: TextStyle(
-                    fontSize: 18,
-                    color: Colors.grey,
-                  ),
-                ),
-              )
-                  : ListView.builder(
-                padding: const EdgeInsets.all(16),
-                itemCount: _filteredCats.length,
-                itemBuilder: (context, index) {
-                  final cat = _filteredCats[index];
-                  return _buildCatCard(cat, index);
-                },
-              ),
-            ),
-          ],
-        ),
       ),
     );
   }
@@ -131,9 +136,7 @@ class LikedCatsScreenState extends State<LikedCatsScreen> {
         onTap: () {
           Navigator.push(
             context,
-            MaterialPageRoute(
-              builder: (context) => DetailScreen(cat: cat),
-            ),
+            MaterialPageRoute(builder: (context) => DetailScreen(cat: cat)),
           );
         },
         child: Card(
@@ -154,13 +157,14 @@ class LikedCatsScreenState extends State<LikedCatsScreen> {
                     imageUrl: cat.imageUrl,
                     height: 250,
                     fit: BoxFit.cover,
-                    placeholder: (context, url) => const Center(
-                      child: CircularProgressIndicator(),
-                    ),
-                    errorWidget: (context, url, error) => Image.asset(
-                      'assets/images/placeholder.png',
-                      fit: BoxFit.cover,
-                    ),
+                    placeholder:
+                        (context, url) =>
+                            const Center(child: CircularProgressIndicator()),
+                    errorWidget:
+                        (context, url, error) => Image.asset(
+                          'assets/images/placeholder.png',
+                          fit: BoxFit.cover,
+                        ),
                   ),
                 ),
               ),
@@ -192,11 +196,7 @@ class LikedCatsScreenState extends State<LikedCatsScreen> {
                     ),
                     IconButton(
                       onPressed: () => _removeCat(index),
-                      icon: Icon(
-                        Icons.delete,
-                        color: Colors.red,
-                        size: 28,
-                      ),
+                      icon: Icon(Icons.delete, color: Colors.red, size: 28),
                       tooltip: 'Remove from liked',
                     ),
                   ],
@@ -250,8 +250,18 @@ class LikedCatsScreenState extends State<LikedCatsScreen> {
 
   String _formatDate(DateTime dateTime) {
     final months = [
-      'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-      'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec',
+      'Jan',
+      'Feb',
+      'Mar',
+      'Apr',
+      'May',
+      'Jun',
+      'Jul',
+      'Aug',
+      'Sep',
+      'Oct',
+      'Nov',
+      'Dec',
     ];
     return '${dateTime.day} ${months[dateTime.month - 1]} ${dateTime.year}';
   }
